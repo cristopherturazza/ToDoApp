@@ -1,0 +1,38 @@
+$primary: #0049CB;
+$secondary: #e7eaee;
+$text: #001c4d;
+$info: #b3cfff;
+$light: #EDF2F4;
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700;900&display=swap');
+@import "~bootstrap/scss/bootstrap";
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    font-family: 'Poppins';
+    background-color: $secondary;
+    color: $text;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.to-do-head {
+    cursor: pointer;
+}
+
+.erased {
+    text-decoration: line-through;
+}
+
