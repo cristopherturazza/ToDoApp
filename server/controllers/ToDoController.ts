@@ -17,6 +17,13 @@ const addToDo = async (req: Request, res: Response) => {
   const { title, description, expires } = req.body;
 
   try {
+    if (!title || !description || !expires)
+      throw Error("Inserire tutti i dati richiesti");
+    if (title.length > 100)
+      throw Error("Lunghezza del titolo maggiore di 100 caratteri");
+    if (description.length > 500)
+      throw Error("Lunghezza della descrizione maggiore di 500 caratteri");
+
     const stmt = db
       .prepare("INSERT INTO to_do(title, description, expires) VALUES(?,?,?)")
       .run([title, description, expires]);
@@ -31,7 +38,13 @@ const addToDo = async (req: Request, res: Response) => {
 const updateToDo = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { title, description, status, expires } = req.body;
+
   try {
+    if (title?.length > 100)
+      throw Error("Lunghezza del titolo maggiore di 100 caratteri");
+    if (description?.length > 500)
+      throw Error("Lunghezza della descrizione maggiore di 500 caratteri");
+
     if (title) {
       const stmt = db
         .prepare("UPDATE to_do SET title = ? WHERE id = ?")
