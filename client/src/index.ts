@@ -1,22 +1,34 @@
 // To-Do List App - Trueblue Interview Test
 
+import "bootstrap";
 import "./assets/scss/styles.scss";
-import { addNewToDo } from "./ts/addNewToDo";
-import { ToDo } from "./ts/ToDo";
+import { ToDoList } from "./ts/ToDoList";
+import { Status } from "./ts/ToDo";
+import * as bootstrap from "bootstrap";
 
-// task di prova per sviluppo
-let today = new Date();
-let task = new ToDo(
-  "Testare nuova funzione",
-  "Test preliminare prima del rilascio di Maggio",
-  "Inserito",
-  today
-);
-addNewToDo(task);
+// On mount
+
+export const toDoList = new ToDoList();
+
+document.addEventListener("DOMContentLoaded", () => {
+  toDoList.getAllTasks();
+});
 
 // Main Event Listeners
 
-// TODO : event on DOMContentLoaded to fetch from API
-
-const addButton = document.querySelector("#add-button");
-addButton.addEventListener("click", () => addNewToDo(task));
+const addTaskForm: HTMLFormElement = document.querySelector("#add-task-form");
+addTaskForm.onsubmit = (e) => {
+  e.preventDefault();
+  const formData = new FormData(addTaskForm);
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const status = formData.get("status") as Status;
+  const date = formData.get("expires") as string;
+  const expires = new Date(date).toLocaleDateString("it-IT", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+  toDoList.newTask(title, description, status, expires);
+  window.location.reload();
+};

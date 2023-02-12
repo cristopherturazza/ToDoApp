@@ -1,8 +1,9 @@
 // create a new row element in the task list
-import { ToDo } from "./ToDo";
+import { ToDo, Status } from "./ToDo";
+import { toDoList } from "..";
 
 // To-Do List wrapper
-const todoList = document.querySelector("#todo-list");
+const todoContainer = document.querySelector("#todo-list");
 
 // Create new To-Do Element filled with task data
 export const addNewToDo = (toDo: ToDo) => {
@@ -12,22 +13,23 @@ export const addNewToDo = (toDo: ToDo) => {
   row.className = "d-flex shadow-sm p-3 rounded-3 mb-3 bg-light";
   row.setAttribute("id", toDo.id);
   row.innerHTML = `<div class="d-flex flex-column w-100">
-  <div class="d-flex flex-row justify-content-between align-items-start to-do-head">
+  <div class="d-flex flex-row justify-content-between align-items-center pointer to-do-head">
     <div class="fw-semibold fs-5 ${
       toDo.status === "Completato" ? "erased" : null
-    }">${toDo.title}</div><div class="d-flex align-items-start mt-1">
-  <div class="badge text-bg-${
-    toDo.status === "Inserito"
-      ? "info"
-      : toDo.status === "In elaborazione"
-      ? "warning"
-      : toDo.status === "Completato"
-      ? "success"
-      : "info"
-  } rounded-pill d-flex align-items-center mx-3">${toDo.status}</div>
+    }">${toDo.title}</div>
+  <div class="d-flex align-items-start">
+    <div class="badge text-bg-${
+      toDo.status === Status.inserito
+        ? "info"
+        : toDo.status === Status.inElaborazione
+        ? "warning"
+        : toDo.status === Status.completato
+        ? "success"
+        : "info"
+    } rounded-pill d-flex align-items-center mx-3">${toDo.status}</div>
     <div class="fw-lighter ${
       toDo.status != "Completato" ? "text-danger" : null
-    } ">${toDo.expires.toLocaleDateString("it-IT")}
+    } ">${toDo.expires}
     </div></div></div>
   <div class="d-flex flex-row justify-content-between border-top mt-2 to-do-body visually-hidden">
   <p class="fw-light mb-0 mt-3">
@@ -54,11 +56,16 @@ export const addNewToDo = (toDo: ToDo) => {
   // Show/Hidden Body
   const headRow = row.querySelector(".to-do-head");
   const bodyRow = row.querySelector(".to-do-body");
+  const deleteButton = row.querySelector(".delete");
 
   headRow.addEventListener("click", () => {
     bodyRow.classList.toggle("visually-hidden");
   });
 
+  deleteButton.addEventListener("click", () => {
+    toDoList.deleteTask(toDo.id);
+  });
+
   // Append to the To-Do List
-  todoList.appendChild(row);
+  todoContainer.appendChild(row);
 };

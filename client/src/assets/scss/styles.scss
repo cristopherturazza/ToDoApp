@@ -4,8 +4,6 @@ $text: #001c4d;
 $info: #b3cfff;
 $light: #EDF2F4;
 
-
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700;900&display=swap');
 @import "~bootstrap/scss/bootstrap";
 
@@ -26,9 +24,10 @@ body {
 
 ul {
     list-style-type: none;
+    padding-left: 0;
 }
 
-.to-do-head {
+.pointer{
     cursor: pointer;
 }
 

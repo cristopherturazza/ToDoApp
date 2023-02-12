@@ -1,6 +1,22 @@
-import { UUIDComponents } from "./../../node_modules/uri-js/dist/esnext/schemes/urn-uuid.d";
-import { ToDo } from "./ToDo";
+import axios from "axios";
+import { ToDo, Status } from "./ToDo";
+import { addNewToDo } from "./addNewToDo";
 
+// To-Do List wrapper
+const todoContainer = document.querySelector("#todo-list");
+
+// No To-Do Placeholder
+
+const noToDo = document.createElement("div");
+noToDo.innerHTML = `<p><span class="fw-bold fs-5">Nessun task inserito</span>.<br>Clicca 'Nuovo Task' per aggiungerne uno.</p>`;
+noToDo.className =
+  "d-flex flex-row text-center justify-content-center align-items-start";
+
+// Axios client
+const api = axios.create({
+  baseURL: process.env.API_PATH,
+  timeout: 5000,
+});
 export class ToDoList {
   tasks: ToDo[] | [];
 
@@ -8,19 +24,43 @@ export class ToDoList {
     this.tasks = [];
   }
 
-  getAllTasks() {
-    //fetch data from api
+  // render tasks on the UI
+  renderTasks() {
+    todoContainer.innerHTML = "";
+    this.tasks.length
+      ? this.tasks.forEach((task) => addNewToDo(task))
+      : todoContainer.appendChild(noToDo);
   }
 
-  newTask() {
-    // post new data to api
+  // fetch all data
+  async getAllTasks() {
+    const fetch = await api.get("/");
+    this.tasks = fetch.data;
+    this.renderTasks();
   }
 
-  deleteTask(id: string) {
-    // delete task by id
+  // add a new task
+  async newTask(
+    title: string,
+    description: string,
+    status: Status,
+    expires: string
+  ) {
+    const fetch = await api.post("/", {
+      title: title,
+      description: description,
+      status: status,
+      expires: expires,
+    });
   }
 
-  updateTask(id: string) {
+  // delete a task
+  async deleteTask(id: string) {
+    const fetch = await api.delete(`/${id}`);
+    window.location.reload();
+  }
+
+  async updateTask(id: string) {
     // update task by id
   }
 }

@@ -14,7 +14,7 @@ const getAllToDo = async (req: Request, res: Response) => {
 
 // Add a new To-Do
 const addToDo = async (req: Request, res: Response) => {
-  const { title, description, expires } = req.body;
+  const { title, description, status, expires } = req.body;
 
   try {
     if (!title || !description || !expires)
@@ -23,10 +23,12 @@ const addToDo = async (req: Request, res: Response) => {
       throw Error("Lunghezza del titolo maggiore di 100 caratteri");
     if (description.length > 500)
       throw Error("Lunghezza della descrizione maggiore di 500 caratteri");
-
+    console.log(title.length);
     const stmt = db
-      .prepare("INSERT INTO to_do(title, description, expires) VALUES(?,?,?)")
-      .run([title, description, expires]);
+      .prepare(
+        "INSERT INTO to_do(title, description, status, expires) VALUES(?,?,?,?)"
+      )
+      .run([title, description, status, expires]);
     res.status(201).json(stmt);
   } catch (err) {
     res.status(400).json({ message: err.message });
