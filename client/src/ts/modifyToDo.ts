@@ -29,6 +29,7 @@ export const modifyToDo = (toDo: ToDo) => {
 
   // modify task button
   const modifyButton = document.querySelector("#modify-task-button");
+
   modifyButton.addEventListener("click", (e) => {
     e.preventDefault();
     const formData = new FormData(modifyForm);
