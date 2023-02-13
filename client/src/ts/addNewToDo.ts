@@ -1,5 +1,6 @@
 // create a new row element in the task list
 import { ToDo, Status } from "./ToDo";
+import { modifyToDo } from "./modifyToDo";
 import { toDoList } from "..";
 
 // To-Do List wrapper
@@ -9,8 +10,15 @@ const todoContainer = document.querySelector("#todo-list");
 export const addNewToDo = (toDo: ToDo) => {
   const row = document.createElement("li");
 
-  // Create Element
-  row.className = "d-flex shadow-sm p-3 rounded-3 mb-3 bg-light";
+  // IT date format
+  const expiresIT = new Date(toDo.expires).toLocaleDateString("it-IT", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
+  // Create Component
+  row.className = "shadow-sm p-3 rounded-3 mb-3 bg-light";
   row.setAttribute("id", toDo.id);
   row.innerHTML = `<div class="d-flex flex-column w-100">
   <div class="d-flex flex-row justify-content-between align-items-center pointer to-do-head">
@@ -29,7 +37,7 @@ export const addNewToDo = (toDo: ToDo) => {
     } rounded-pill d-flex align-items-center mx-3">${toDo.status}</div>
     <div class="fw-lighter ${
       toDo.status != "Completato" ? "text-danger" : null
-    } ">${toDo.expires}
+    } ">${expiresIT}
     </div></div></div>
   <div class="d-flex flex-row justify-content-between border-top mt-2 to-do-body visually-hidden">
   <p class="fw-light mb-0 mt-3">
@@ -53,17 +61,25 @@ export const addNewToDo = (toDo: ToDo) => {
 
   // Row Events
 
-  // Show/Hidden Body
   const headRow = row.querySelector(".to-do-head");
   const bodyRow = row.querySelector(".to-do-body");
   const deleteButton = row.querySelector(".delete");
+  const modifyButton = row.querySelector(".modify");
 
+  // Show/Hidden Body
   headRow.addEventListener("click", () => {
     bodyRow.classList.toggle("visually-hidden");
   });
 
+  // Remove To-Do
   deleteButton.addEventListener("click", () => {
     toDoList.deleteTask(toDo.id);
+  });
+
+  // Modify To-Do
+  modifyButton.addEventListener("click", () => {
+    const toModify = toDoList.tasks.find((task: ToDo) => task.id === toDo.id);
+    modifyToDo(toModify);
   });
 
   // Append to the To-Do List

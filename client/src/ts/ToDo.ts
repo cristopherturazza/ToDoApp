@@ -24,17 +24,4 @@ export class ToDo {
     this.status = status;
     this.expires = expires;
   }
-
-  setTitle(newTitle: string): void {
-    this.title = newTitle;
-  }
-  setDescription(newDescription: string): void {
-    this.description = newDescription;
-  }
-  setStatus(newStatus: Status): void {
-    this.status = newStatus;
-  }
-  setExpires(newDate: string): void {
-    this.expires = newDate;
-  }
 }

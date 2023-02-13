@@ -46,21 +46,35 @@ export class ToDoList {
     status: Status,
     expires: string
   ) {
-    const fetch = await api.post("/", {
+    const add = await api.post("/", {
       title: title,
       description: description,
       status: status,
       expires: expires,
     });
+    window.location.reload();
   }
 
   // delete a task
   async deleteTask(id: string) {
-    const fetch = await api.delete(`/${id}`);
+    const deleteTask = await api.delete(`/${id}`);
     window.location.reload();
   }
 
-  async updateTask(id: string) {
-    // update task by id
+  // update a task
+  async updateTask(
+    id: string,
+    title: string,
+    description: string,
+    status: Status,
+    expires: string
+  ) {
+    const updateTask = await api.patch(`/${id}`, {
+      title: title,
+      description: description,
+      status: status,
+      expires: expires,
+    });
+    window.location.reload();
   }
 }

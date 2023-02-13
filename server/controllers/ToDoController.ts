@@ -24,6 +24,7 @@ const addToDo = async (req: Request, res: Response) => {
     if (description.length > 500)
       throw Error("Lunghezza della descrizione maggiore di 500 caratteri");
     console.log(title.length);
+
     const stmt = db
       .prepare(
         "INSERT INTO to_do(title, description, status, expires) VALUES(?,?,?,?)"
