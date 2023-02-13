@@ -18,10 +18,10 @@ export const addNewToDo = (toDo: ToDo) => {
   });
 
   // Create Component
-  row.className = "shadow-sm p-3 rounded-3 mb-3 bg-light";
+  row.className = "to-do-element rounded-3 mb-3 bg-light";
   row.setAttribute("id", toDo.id);
   row.innerHTML = `<div class="d-flex flex-column w-100">
-  <div class="d-flex flex-row justify-content-between align-items-center pointer to-do-head">
+  <div class="d-flex flex-row justify-content-between align-items-center pointer p-3 to-do-head">
     <div class="fw-semibold fs-5 ${
       toDo.status === "Completato" ? "erased" : null
     }">${toDo.title}</div>
@@ -39,7 +39,7 @@ export const addNewToDo = (toDo: ToDo) => {
       toDo.status != "Completato" ? "text-danger" : null
     } ">${expiresIT}
     </div></div></div>
-  <div class="d-flex flex-row justify-content-between border-top mt-2 to-do-body visually-hidden">
+  <div class="d-flex flex-row justify-content-between border-top mt-2 p-3 pt-1 to-do-body visually-hidden">
   <p class="fw-light mb-0 mt-3">
   ${toDo.description}
   </p>
