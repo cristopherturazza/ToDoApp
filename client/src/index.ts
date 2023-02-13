@@ -1,4 +1,4 @@
-// To-Do List App - Trueblue Interview Test
+// To-Do List App
 
 import "bootstrap";
 import "./assets/scss/styles.scss";

@@ -35,3 +35,25 @@ ul {
     text-decoration: line-through;
 }
 
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.subwrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 6rem;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 6rem;
+    background-color: $text;
+    color: $info;
+}
+
