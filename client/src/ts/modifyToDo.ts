@@ -1,10 +1,10 @@
 import { toDoList } from "..";
-import * as bootstrap from "bootstrap";
+import { Modal } from "bootstrap";
 import { ToDo, Status } from "./ToDo";
 
 // Modify Task Modal
 export const modifyToDo = (toDo: ToDo) => {
-  const modifyModal = new bootstrap.Modal("#modifytask", {
+  const modifyModal = new Modal("#modifytask", {
     keyboard: false,
     backdrop: "static",
     focus: true,
@@ -38,5 +38,6 @@ export const modifyToDo = (toDo: ToDo) => {
     const status = formData.get("status") as Status;
     const expires = formData.get("expires") as string;
     toDoList.updateTask(toDo.id, title, description, status, expires);
+    modifyModal.hide();
   });
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ToDo, Status } from "./ToDo";
 import { addNewToDo } from "./addNewToDo";
+import { renderReset } from "./renderReset";
 
 // To-Do List wrapper
 const todoContainer = document.querySelector("#todo-list");
@@ -26,7 +27,7 @@ export class ToDoList {
 
   // render tasks on the UI
   renderTasks() {
-    todoContainer.innerHTML = "";
+    renderReset();
     this.tasks?.length
       ? this.tasks.forEach((task) => addNewToDo(task))
       : todoContainer.appendChild(noToDo);
@@ -58,7 +59,7 @@ export class ToDoList {
         status: status,
         expires: expires,
       });
-      window.location.reload();
+      this.getAllTasks();
     } catch (err) {
       console.log(err.response.data.message);
     }
@@ -68,7 +69,7 @@ export class ToDoList {
   async deleteTask(id: string) {
     try {
       const deleteTask = await api.delete(`/${id}`);
-      window.location.reload();
+      this.getAllTasks();
     } catch (err) {
       console.log(err.response.data.message);
     }
@@ -89,7 +90,7 @@ export class ToDoList {
         status: status,
         expires: expires,
       });
-      window.location.reload();
+      this.getAllTasks();
     } catch (err) {
       console.log(err.response.data.message);
     }

@@ -4,6 +4,7 @@ import "bootstrap";
 import "./assets/scss/styles.scss";
 import { ToDoList } from "./ts/ToDoList";
 import { Status } from "./ts/ToDo";
+import { Modal } from "bootstrap";
 
 // On mount
 
@@ -15,7 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Add Task Event Listener
 
+const addModal = new Modal("#addtask", {
+  keyboard: false,
+  backdrop: "static",
+  focus: true,
+});
+
+const addTaskButton = document.querySelector("#new-task-button");
 const addTaskForm: HTMLFormElement = document.querySelector("#add-task-form");
+
+addTaskButton.addEventListener("click", () => {
+  addModal.show();
+});
+
 addTaskForm.onsubmit = (e) => {
   e.preventDefault();
   const formData = new FormData(addTaskForm);
@@ -24,4 +37,5 @@ addTaskForm.onsubmit = (e) => {
   const status = formData.get("status") as Status;
   const expires = formData.get("expires") as string;
   toDoList.newTask(title, description, status, expires);
+  addModal.hide();
 };
