@@ -20,7 +20,7 @@ export const addNewToDo = (toDo: ToDo) => {
   // Create Component
   row.className = "to-do-element rounded-3 mb-3 bg-light";
   row.setAttribute("id", toDo.id);
-  row.innerHTML = `<div class="d-flex flex-column w-100">
+  row.innerHTML = `<div class="d-flex flex-column">
   <div class="d-flex flex-row justify-content-between align-items-center pointer p-3 to-do-head">
     <div class="fw-semibold fs-5 ${
       toDo.status === "Completato" ? "erased" : null
