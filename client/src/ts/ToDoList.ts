@@ -34,9 +34,14 @@ export class ToDoList {
 
   // fetch all data
   async getAllTasks() {
-    const fetch = await api.get("/");
-    this.tasks = fetch.data;
-    this.renderTasks();
+    try {
+      const fetch = await api.get("/");
+      this.tasks = fetch.data;
+      this.renderTasks();
+    } catch (err) {
+      this.renderTasks();
+      console.log(err.response.data.message);
+    }
   }
 
   // add a new task
@@ -46,19 +51,27 @@ export class ToDoList {
     status: Status,
     expires: string
   ) {
-    const add = await api.post("/", {
-      title: title,
-      description: description,
-      status: status,
-      expires: expires,
-    });
-    window.location.reload();
+    try {
+      const add = await api.post("/", {
+        title: title,
+        description: description,
+        status: status,
+        expires: expires,
+      });
+      window.location.reload();
+    } catch (err) {
+      console.log(err.response.data.message);
+    }
   }
 
   // delete a task
   async deleteTask(id: string) {
-    const deleteTask = await api.delete(`/${id}`);
-    window.location.reload();
+    try {
+      const deleteTask = await api.delete(`/${id}`);
+      window.location.reload();
+    } catch (err) {
+      console.log(err.response.data.message);
+    }
   }
 
   // update a task
@@ -69,12 +82,16 @@ export class ToDoList {
     status: Status,
     expires: string
   ) {
-    const updateTask = await api.patch(`/${id}`, {
-      title: title,
-      description: description,
-      status: status,
-      expires: expires,
-    });
-    window.location.reload();
+    try {
+      const updateTask = await api.patch(`/${id}`, {
+        title: title,
+        description: description,
+        status: status,
+        expires: expires,
+      });
+      window.location.reload();
+    } catch (err) {
+      console.log(err.response.data.message);
+    }
   }
 }

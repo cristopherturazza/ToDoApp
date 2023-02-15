@@ -1,15 +1,21 @@
 const path = require("path");
 
 const Dotenv = require("dotenv-webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
       },
       {
         test: /\.(scss)$/,
@@ -35,7 +41,13 @@ module.exports = {
       },
     ],
   },
-  plugins: [new Dotenv()],
+  plugins: [
+    new Dotenv(),
+    new HtmlWebpackPlugin({
+      title: "To-Do App",
+      template: "./src/index.html",
+    }),
+  ],
   resolve: {
     extensions: [".ts", ".js"],
   },
