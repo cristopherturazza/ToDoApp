@@ -27,7 +27,7 @@ export class ToDoList {
   // render tasks on the UI
   renderTasks() {
     todoContainer.innerHTML = "";
-    this.tasks.length
+    this.tasks?.length
       ? this.tasks.forEach((task) => addNewToDo(task))
       : todoContainer.appendChild(noToDo);
   }
