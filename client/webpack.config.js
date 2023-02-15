@@ -42,7 +42,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new Dotenv(),
+    new Dotenv({
+      systemvars: true,
+    }),
     new HtmlWebpackPlugin({
       title: "To-Do App",
       template: "./src/index.html",
