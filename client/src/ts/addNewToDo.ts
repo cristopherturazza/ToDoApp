@@ -22,7 +22,7 @@ export const addNewToDo = (toDo: ToDo) => {
   row.setAttribute("id", toDo.id);
   row.innerHTML = `<div class="d-flex flex-column">
   <div class="d-flex flex-row justify-content-between align-items-center pointer p-3 to-do-head">
-    <div class="fw-semibold fs-5 ${
+    <div class="fw-semibold ${
       toDo.status === "Completato" ? "erased" : null
     }">${toDo.title}</div>
   <div class="d-flex align-items-start">

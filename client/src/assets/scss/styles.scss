@@ -4,8 +4,13 @@ $text: #001c4d;
 $info: #b3cfff;
 $light: #EDF2F4;
 
+
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700;900&display=swap');
 @import "~bootstrap/scss/bootstrap";
+
+
+
 
 * {
     box-sizing: border-box;
@@ -20,6 +25,9 @@ body {
     font-family: 'Poppins';
     background-color: $secondary;
     color: $text;
+    @include media-breakpoint-down(sm) {
+            font-size: rfs-fluid-value(0.95rem);
+        }
 }
 
 ul {
@@ -34,6 +42,13 @@ ul {
             }
 }
 
+.display-1 {
+    letter-spacing: -6px;
+}
+
+.container-sm {
+    max-width: 700px;
+}
 
 .pointer{
     cursor: pointer;
@@ -49,7 +64,7 @@ ul {
     overflow: hidden;
 }
 
-.subwrapper {
+.sub-wrapper {
     display: flex;
     flex-direction: column;
     position: relative;
