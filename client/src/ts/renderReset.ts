@@ -6,10 +6,16 @@ export const renderReset = () => {
   const description: HTMLInputElement = addForm.querySelector("#description");
   const status: HTMLInputElement = addForm.querySelector("#status");
   const expires: HTMLInputElement = addForm.querySelector("#expires");
+  const titleCounter: HTMLElement = addForm.querySelector("#title-counter");
+  const descriptionCounter: HTMLElement = addForm.querySelector(
+    "#description-counter"
+  );
 
   todoContainer.innerHTML = "";
   title.value = "";
   description.value = "";
   status.value = "Inserito";
   expires.value = "";
+  titleCounter.textContent = "0";
+  descriptionCounter.textContent = "0";
 };
