@@ -86,7 +86,7 @@ ul {
     color: $info;
 }
 
-input[type=text]:focus ~ .counter-container {
+input:focus ~ .counter-container {
     display: block;
 }
 
