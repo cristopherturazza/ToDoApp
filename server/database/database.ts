@@ -1,5 +1,5 @@
 import Database from "better-sqlite3";
-const db = new Database("./database/todo.db", { verbose: console.log });
+const db = new Database("./data/todo.db", { verbose: console.log });
 db.pragma("journal_mode = WAL");
 
 // create to-do table if not exist
