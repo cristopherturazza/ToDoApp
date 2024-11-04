@@ -5,6 +5,7 @@ import path from 'path';
 
 // Ottieni il percorso del database
 const dbPath = path.join(process.env.DB_PATH, 'todo.db');
+console.log("dbPath:", dbPath);
 
 // Crea la cartella se non esiste
 const dir = path.dirname(dbPath);
