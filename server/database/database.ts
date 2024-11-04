@@ -1,5 +1,18 @@
 import Database from "better-sqlite3";
-const db = new Database("./data/todo.db", { verbose: console.log });
+import fs from 'fs';
+import path from 'path';
+
+
+// Ottieni il percorso del database
+const dbPath = path.join(process.env.DB_PATH, 'todo.db');
+
+// Crea la cartella se non esiste
+const dir = path.dirname(dbPath);
+if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+}
+
+const db = new Database(dbPath,{ verbose: console.log });
 db.pragma("journal_mode = WAL");
 
 // create to-do table if not exist
