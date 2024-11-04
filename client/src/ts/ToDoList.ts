@@ -18,8 +18,6 @@ const api = axios.create({
   baseURL: process.env.API_PATH,
   timeout: 5000,
 });
-console.log(process.env.API_PATH);
-
 export class ToDoList {
   tasks: ToDo[] | [];
 
